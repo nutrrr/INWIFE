@@ -21,8 +21,8 @@ public class PlayerInput : MonoBehaviour
         movementInput = new Vector2(horizontalInput, verticalInput).normalized;
 
         // Check for jump input
-        jumpInput = Input.GetKeyDown(KeyCode.Space);
-        jumpInputRelease = Input.GetKeyUp(KeyCode.Space);
+        jumpInput = Input.GetKeyDown(KeyCode.W);
+        jumpInputRelease = Input.GetKeyUp(KeyCode.W);
 
         gildeInput = Input.GetKey(KeyCode.K);
         glideInputRelease = Input.GetKeyUp(KeyCode.K);

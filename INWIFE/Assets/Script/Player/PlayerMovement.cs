@@ -251,7 +251,7 @@ public class PlayerMovement : MonoBehaviour
             force -= rb.velocity.y;
 
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-        #endregion    }
+        #endregion
     }
 
     void JumpRelease()
@@ -271,8 +271,8 @@ public class PlayerMovement : MonoBehaviour
     void CheckGrounded()
     {
         // Set origin point below player for Raycast
-        Vector2 originRight = new Vector2(rb.position.x + (collider2d.size.x / 2.125f), rb.position.y - (collider2d.size.y / 2f));
-        Vector2 originLeft = new Vector2(rb.position.x - (collider2d.size.x / 2.125f), rb.position.y - (collider2d.size.y / 2f));
+        Vector2 originRight = new Vector2(rb.position.x + (collider2d.size.x / 2f), rb.position.y - (collider2d.size.y / 2f));
+        Vector2 originLeft = new Vector2(rb.position.x - (collider2d.size.x / 2f), rb.position.y - (collider2d.size.y / 2f));
 
         // Draw Ray from origin point to check ground
         RaycastHit2D hitR = Physics2D.Raycast(originRight, Vector2.down, 0.025f, layerGround);

@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae83086a9f8929d4ab299b9caccaff5b, type: 3}
   m_Name: PlayerMove Data
   m_EditorClassIdentifier: 
-  gravityStrength: -77.85467
-  gravityScale: 7.9362555
+  gravityStrength: -92.773445
+  gravityScale: 9.457027
   fallGravityMult: 1.5
-  maxFallSpeed: 23
+  maxFallSpeed: 17
   fastFallGravityMult: 2
-  maxFastFallSpeed: 28
-  runMaxSpeed: 12
-  runAcceleration: 2
-  runAccelAmount: 8.333333
-  runDecceleration: 5
-  runDeccelAmount: 20.833334
+  maxFastFallSpeed: 23
+  runMaxSpeed: 13
+  runAcceleration: 3.75
+  runAccelAmount: 14.423077
+  runDecceleration: 3
+  runDeccelAmount: 11.538462
   accelInAir: 0.65
   deccelInAir: 0.65
   doConserveMomentum: 1
-  jumpHeight: 4.5
-  jumpTimeToApex: 0.34
-  jumpForce: 26.470587
+  jumpHeight: 4.75
+  jumpTimeToApex: 0.32
+  jumpForce: 29.687502
   jumpCutGravityMult: 2
   jumpHangGravityMult: 0.5
   jumpHangTimeThreshold: 1

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     public PlayerMovement playerMovement;
     public Pow_Glider glider;
+    public PlayerWallSlide wallSlide;
 
     [Header("Check")]
     [SerializeField] private LayerMask layerGround;
@@ -50,16 +51,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         #region Chack Ground
-        // Set origin point below player for Raycast
-        Vector2 originRight = new Vector2(rb.position.x + (collider2d.size.x / 2.125f), rb.position.y - (collider2d.size.y / 2f));
-        Vector2 originLeft = new Vector2(rb.position.x - (collider2d.size.x / 2.125f), rb.position.y - (collider2d.size.y / 2f));
-
-        // Draw Ray from origin point to check ground
-        RaycastHit2D hitR = Physics2D.Raycast(originRight, Vector2.down, 0.05f, layerGround);
-        RaycastHit2D hitL = Physics2D.Raycast(originLeft, Vector2.down, 0.05f, layerGround);
-
         // Ray hit the ground
-        if (hitR.collider != null || hitL.collider != null)
+        if (ChackGround())
         {
             IsGrounded = true;
             glider.Refule();
@@ -70,6 +63,18 @@ public class PlayerController : MonoBehaviour
             IsGrounded = false;
         }
         #endregion
+
+        #region Chack Wall
+        if (IsWalled())
+        {
+
+        }
+        else
+        {
+
+        }
+        #endregion
+
 
         #region InputBuffer
         JumpBufferCounter -= Time.deltaTime;
@@ -101,6 +106,10 @@ public class PlayerController : MonoBehaviour
         {
 
         }
+        else if (IsWalled() && !IsGrounded)
+        {
+            Debug.Log("Walled");
+        }
         else
         {
             HandleMovement();
@@ -115,6 +124,10 @@ public class PlayerController : MonoBehaviour
         if ((playerInput.GetGlideInput(0) && !IsGrounded && glider.CanGilde()))
         {
             HandleGlider();
+        }
+        else if (IsWalled() && !IsGrounded)
+        {
+            Debug.Log("Walled");
         }
         else
         {
@@ -142,5 +155,32 @@ public class PlayerController : MonoBehaviour
     {
         glider.HandleGlider();
         glider.InitTheInput(playerInput.GetHorizontalInput(), playerInput.GetGlideInput(0), playerInput.GetGlideInput(1), IsFacingRight);
+    }
+
+    private bool ChackGround()
+    {
+        // Set origin point below player for Raycast
+        Vector2 originRight = new Vector2(rb.position.x + (collider2d.size.x / 2f), rb.position.y - (collider2d.size.y / 2f));
+        Vector2 originLeft = new Vector2(rb.position.x - (collider2d.size.x / 2f), rb.position.y - (collider2d.size.y / 2f));
+
+        // Draw Ray from origin point to check ground
+        RaycastHit2D hitR = Physics2D.Raycast(originRight, Vector2.down, 0.05f, layerGround);
+        RaycastHit2D hitL = Physics2D.Raycast(originLeft, Vector2.down, 0.05f, layerGround);
+        return hitR || hitL;
+    }
+
+    private bool IsWalled()
+    {
+        float horizontalInput = IsFacingRight ? 1f : -1f;
+        // Set origin point below player for Raycast
+        Vector2 originTop = new Vector2(rb.position.x + ((collider2d.size.x / 2f) * horizontalInput), rb.position.y - (collider2d.size.y / 2f));
+        Vector2 originDown = new Vector2(rb.position.x + ((collider2d.size.x / 2f) * horizontalInput), rb.position.y - (collider2d.size.y / 2f));
+
+        // Draw Ray from origin point to check ground
+        RaycastHit2D hitR = Physics2D.Raycast(originTop, Vector2.right * horizontalInput, 0.05f, layerGround);
+        RaycastHit2D hitL = Physics2D.Raycast(originDown, Vector2.right * horizontalInput, 0.05f, layerGround);
+
+        // Ray hit the ground
+        return hitR || hitL;
     }
 }
