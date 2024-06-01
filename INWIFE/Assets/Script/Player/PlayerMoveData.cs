@@ -42,7 +42,7 @@ public class PlayerMoveData : ScriptableObject
 	public float jumpCutGravityMult; //Multiplier to increase gravity if the player releases thje jump button while still jumping
 	[Range(0f, 1)] public float jumpHangGravityMult; //Reduces gravity while close to the apex (desired max height) of the jump
 	public float jumpHangTimeThreshold; //Speeds (close to 0) where the player will experience extra "jump hang". The player's velocity.y is closest to 0 at the jump's apex (think of the gradient of a parabola or quadratic function)
-	[Space(0.5f)]
+	[Space(1.5f)]
 	public float jumpHangAccelerationMult;
 	public float jumpHangMaxSpeedMult;
 
@@ -56,6 +56,13 @@ public class PlayerMoveData : ScriptableObject
 	private void OnValidate()
 	{
 		//Calculate gravity strength using the formula (gravity = 2 * jumpHeight / timeToJumpApex^2) 
+		/**s = ut + 0.5at ^ 2
+		 * v = 0
+		 * s = jumpHeight
+		 * t = jumpTimeToApex
+		 *	
+		 * 
+		 * */
 		gravityStrength = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
 
 		//Calculate the rigidbody's gravity scale (ie: gravity strength relative to unity's gravity value, see project settings/Physics2D)
