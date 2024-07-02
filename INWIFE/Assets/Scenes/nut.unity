@@ -498,11 +498,11 @@ MonoBehaviour:
     m_Bits: 128
   maxSlopeAngle: 60
   slopeCheckDistance: 1
-  maxSpeedNormal: 13.6
+  maxSpeedNormal: 14.2
   maxSpeedBoot: 16.2
   acceleration: 12
   accelerationInAir: 0.65
-  deceleration: 8
+  deceleration: 3
   decelerationInAir: 0.38
   jumpHeight: 4.3
   maxFallSpeed: 20

@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abc8b5b696179a4298cc11d8eb109c6, type: 3}
+  m_Name: Player Data
+  m_EditorClassIdentifier: 
+  layerGround:
+    serializedVersion: 2
+    m_Bits: 128
+  rb: {fileID: 0}
+  maxSpeedNormal: 14.2
+  maxSpeedBoot: 19.2
+  acceleration: 12
+  accelerationInAir: 0.8
+  deceleration: 1.66
+  decelerationInAir: 0.38
+  accelerationMaxSpeed: 5
+  decelerationMaxSpeed: 5
+  jumpHeight: 4.8
+  maxFallSpeed: 20
+  jumpForce: 15.238096
+  timeToJumpApex: 0.63
+  defaultGravity: 1
+  jumpGravity: -24.187454
+  jumpGravityScale: 2.4655917
+  fallingMultiplier: 1.48
+  jumpCutOffMultiplier: 2.33
+  jumpHangGravityMult: 0.36
+  jumpHangTimeThreshold: 1.13
+  jumpHangAccelerationMult: 1.1
+  jumpHangMaxSpeedMult: 1.2
+  coyoteTime: 0.17
+  jumpBuffer: 0.17
+  shootBuffer: 0.17
+  resetAimingBuffer: 0
+  AimingTimeScale: 0.36
+  RotationAimSpeed: 360
+  ResetRotationAimSpeedMult: 2
+  bulletPrefab: {fileID: 2421077510231153554, guid: c2a5036af0002b042836b1b8c646d599, type: 3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1536
+  firePoint: {fileID: 0}
+  bulletSpeed: 35
+  bulletMaxAmount: 4
+  bulletAmount: 4
+  aimAssistRadius: 18
+  aimAssistAngle: 30

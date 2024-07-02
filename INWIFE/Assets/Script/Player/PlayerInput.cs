@@ -1,76 +1,86 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] private Vector2 movementInput;
-    [SerializeField] private bool jumpInput;
-    [SerializeField] private bool jumpInputRelease;
-    [SerializeField] private bool gildeInput;
-    [SerializeField] private bool glideInputRelease;
+    private PlayerData data;
 
-    [SerializeField] private bool swapInput;
-    [SerializeField] private bool attackInput;
+    public float MoveXInput { get; private set; } //AD
+    public float MoveYInput { get; private set; } //WS
 
-    public void HandleInput()
+    private bool jumpInput;
+    public bool JumpInputRelease { get; private set; }
+
+    private bool aimInput;
+    public bool AimInputRelease { get; private set; }
+
+    public bool ResetAimingInput { get; private set; }
+
+    public bool ShootInput { get; private set; }
+    public bool ShootInputRelease { get; private set; }
+
+    public bool trickInput;
+    public bool TrickInputRelease { get; private set; }
+
+    public float JumpBufferCounter { get; private set; }
+    public float AimBufferCounter { get; private set; }
+
+    private void Awake()
     {
-        // Get the horizontal and vertical input axes
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        // Calculate the movement direction
-        movementInput = new Vector2(horizontalInput, verticalInput).normalized;
-
-        // Check for jump input
-        jumpInput = Input.GetKeyDown(KeyCode.W);
-        jumpInputRelease = Input.GetKeyUp(KeyCode.W);
-
-        gildeInput = Input.GetKey(KeyCode.K);
-        glideInputRelease = Input.GetKeyUp(KeyCode.K);
-
-
-        attackInput = Input.GetKeyDown(KeyCode.J);
-        swapInput = Input.GetKeyDown(KeyCode.L);
-
+        data = GetComponent<Player>().PlayerData;
     }
 
-    public Vector2 GetHorizontalInput()
+    public void LogicUpdate()
     {
-        return movementInput;
-    }
-    public bool GetGlideInput(int type)
-    {
-        switch (type)
+        MoveXInput = Input.GetAxisRaw("Horizontal");
+        MoveYInput = Input.GetAxisRaw("Vertical");
+
+        jumpInput = Input.GetKeyDown(KeyCode.Space);
+        JumpInputRelease = Input.GetKeyUp(KeyCode.Space);
+
+        aimInput = Input.GetKeyDown(KeyCode.J);
+        AimInputRelease = Input.GetKeyUp(KeyCode.J);
+
+        ResetAimingInput = Input.GetKeyDown(KeyCode.L);
+
+        ShootInput = Input.GetKeyDown(KeyCode.S);
+        ShootInputRelease = Input.GetKeyUp(KeyCode.S);
+        
+        trickInput = Input.GetKeyDown(KeyCode.K);
+        TrickInputRelease = Input.GetKeyUp(KeyCode.K);
+
+        if (jumpInput)
         {
-            case 0:
-                return gildeInput;
-            case 1:
-                return glideInputRelease;
-            default:
-                return gildeInput;
+            JumpBufferCounter = data.jumpBuffer;
         }
 
-    }
-
-    public bool GetJumpInput(int type)
-    {
-        switch (type)
+        if (aimInput)
         {
-            case 0:
-                return jumpInput;
-            case 1:
-                return jumpInputRelease;
-            default:
-                return jumpInput;
+            AimBufferCounter = data.shootBuffer;
         }
+
+
+        JumpBufferCounter -= Time.deltaTime;
+        AimBufferCounter -= Time.deltaTime;
     }
 
-    public bool GetSwapInput()
+    public bool HasBeenPressJump()
     {
-        return swapInput;
+        return JumpBufferCounter > 0;
+    }
+    
+    public bool HasBeenPressAim()
+    {
+        return AimBufferCounter > 0;
     }
 
-    public bool GetAttackInput()
+    public void ResetJumpBufferCounter()
     {
-        return attackInput;
+        JumpBufferCounter = 0;
+    }
+    public void ResetAimBufferCounter()
+    {
+        AimBufferCounter = 0;
     }
 }

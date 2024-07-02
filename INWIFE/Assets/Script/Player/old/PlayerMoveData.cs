@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Player Data")] //Create a new playerData object by right clicking in the Project Menu then Create/Player/Player Data and drag onto the player
+[CreateAssetMenu(menuName = "Player Move Data")] //Create a new playerData object by right clicking in the Project Menu then Create/Player/Player Data and drag onto the player
 public class PlayerMoveData : ScriptableObject
 {
 	[Header("Gravity")]
@@ -56,13 +56,6 @@ public class PlayerMoveData : ScriptableObject
 	private void OnValidate()
 	{
 		//Calculate gravity strength using the formula (gravity = 2 * jumpHeight / timeToJumpApex^2) 
-		/**s = ut + 0.5at ^ 2
-		 * v = 0
-		 * s = jumpHeight
-		 * t = jumpTimeToApex
-		 *	
-		 * 
-		 * */
 		gravityStrength = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
 
 		//Calculate the rigidbody's gravity scale (ie: gravity strength relative to unity's gravity value, see project settings/Physics2D)

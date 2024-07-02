@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkateboardBullet : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]private LayerMask hitableLayer;
     private bool hasHit;
     void Start()
     {
@@ -16,20 +17,21 @@ public class SkateboardBullet : MonoBehaviour
     {
         
     }
-    public void OnHitTaget()
+    public void OnHitTaget(GameObject taget)
     {
-
+        Destroy(taget);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player"){return;}
-
         if (collision.tag == "Enemy")
         {
-            OnHitTaget();
+            OnHitTaget(collision.gameObject);
         }
-        Destroy(gameObject);
+        if ((hitableLayer & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
+        {
+            Destroy(gameObject);
+        }
 
     }
 }
